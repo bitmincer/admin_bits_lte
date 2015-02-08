@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>AdminLTE</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <%%= stylesheet_link_tag "admin_bits", media: 'all' %>
+    <%%= javascript_include_tag "admin_bits" %>
+  </head>
+  <body class="skin-blue">
+    <header class="header">
+      <a href="#" class="logo">
+        AdminBitsLte
+      </a>
+      <nav class="navbar navbar-static-top" role="navigation">
+        <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <div class="navbar-left resources-nav">
+          <ul class="nav navbar-nav">
+            <%% all_resources.each do |r| %>
+              <%%= resource_nav_link(r) %>
+            <%% end %>
+          </ul>
+        </div>
+        <div class="navbar-right">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="#" class="not-active">
+                <i class="glyphicon glyphicon-user"></i>
+                majko7@interia.pl
+              </a>
+            </li>
+            <li>
+              <a href="#">logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+      <aside class="left-side sidebar-offcanvas">
+        <section class="sidebar">
+        <%%= render partial: "admin/#{current_resource.downcase}/filters" %>
+        </section>
+      </aside>
+      <aside class="right-side">
+        <section class="content-header">
+            <a href="#" class="btn btn-primary pull-right"><%%= "New #{current_resource.singularize}"%></a>
+            <h1>
+                <%%= current_resource %>
+            </h1>
+        </section>
+
+        <section class="content">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title"><%%= current_resource %></h3>
+                </div>
+                <div class="box-body table-responsive">
+                  <%%= yield %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </body>
+</html>
